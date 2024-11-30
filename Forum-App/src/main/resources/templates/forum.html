@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Forum</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark justify-content-center">
+
+  <a class="navbar-brand" href="#">Forum</a>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+</nav>
+
+	<div class ="container">
+		<div class = "row justify-content-center">
+			<h1>List of topics</h1>
+		</div>
+		
+		<div class = "row">
+			<div class = "col-lg-3 justify-content-center">
+				<a th:href = "@{/forum/new}" class = "btn btn-primary btn-sm mb-3"> Add Topic</a>
+			</div>
+		</div>
+		<table class = "table table-striped table-bordered">
+			<thead class = "table-dark">
+				<tr>
+					<th> Topic Name</th>
+					<th> Text </th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each = "forum: ${forum}">
+					<td th:text = "${forum.forumName}"></td>
+					<td th:text = "${forum.text}"></td>
+					<td>
+						<a th:href = "@{/forum/edit/{id}(id=${forum.id})}"
+						 class = "btn btn-primary">Update</a>
+						
+						<a th:href = "@{/forum/{id}(id=${forum.id})}"
+						 class = "btn btn-danger">Delete</a>
+						 
+					</td>
+				</tr>
+			</tbody>
+		
+		</table>
+		
+	</div>
+</body>
+</html>

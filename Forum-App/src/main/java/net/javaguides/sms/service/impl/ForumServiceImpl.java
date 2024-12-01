@@ -34,6 +34,12 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
+	public List<Forum> getForumsByName(String name) {
+		return forumRepository.findByForumNameContainingIgnoreCase(name);
+	}
+
+
+	@Override
 	public Forum updateForum(Forum forum) {
 		return forumRepository.save(forum);
 	}

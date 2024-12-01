@@ -10,7 +10,10 @@ public interface ForumService {
 	Forum saveForum(Forum forum);
 	
 	Forum getForumById(Long id);
-	
+
+	List<Forum> getForumsByName(String name);
+
+
 	Forum updateForum(Forum forum);
 	
 	void deleteForumById(Long id);

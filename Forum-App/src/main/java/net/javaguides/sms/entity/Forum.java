@@ -1,6 +1,8 @@
 package net.javaguides.sms.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "forums")
@@ -11,9 +13,13 @@ public class Forum {
 	private Long id;
 	
 	@Column(name = "forum_name", nullable = false)
+	@NotBlank(message = "Forum name is required")
+	@Size(min = 3, max = 50, message = "Forum name must be between 3 and 50 characters")
 	private String forumName;
 	
 	@Column(name = "text")
+	@NotBlank(message = "Text is required")
+	@Size(min = 10, max = 500, message = "Text must be between 10 and 500 characters")
 	private String text;
 	
 	public Forum() {

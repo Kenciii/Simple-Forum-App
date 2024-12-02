@@ -4,11 +4,10 @@ import net.javaguides.sms.entity.Forum;
 import net.javaguides.sms.service.ForumService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class ForumController {
@@ -38,7 +37,11 @@ public class ForumController {
 	}
 
 	@PostMapping("/forum")
-	public String saveForum(@ModelAttribute("forum") Forum forum) {
+	public String saveForum(@Valid @ModelAttribute("forum") Forum forum, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			// Vraćamo se na formu za kreiranje ako validacija ne prođe
+			return "create_forum";
+		}
 		forumService.saveForum(forum);
 		return "redirect:/forum";
 	}
@@ -51,7 +54,14 @@ public class ForumController {
 
 	@PostMapping("/forum/{id}")
 	public String updateForum(@PathVariable Long id,
-							  @ModelAttribute("forum") Forum forum, Model model) {
+							  @Valid @ModelAttribute("forum") Forum forum,
+							  BindingResult result,
+							  Model model) {
+		if (result.hasErrors()) {
+			// Vraćamo se na formu za uređivanje ako validacija ne prođe
+			return "edit_forum";
+		}
+
 		Forum existingForum = forumService.getForumById(id);
 		existingForum.setId(id);
 		existingForum.setForumName(forum.getForumName());

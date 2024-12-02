@@ -1,65 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Create Topic </title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+	<meta charset="ISO-8859-1">
+	<title>Create Topic </title>
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark justify-content-center">
-
-  <a class="navbar-brand" href="#">Create Topic</a>
-
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
+	<a class="navbar-brand" href="#">Create Topic</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 </nav>
 <br>
 <br>
-	<div class = "container">
-		<div class = "row">
-			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class = "text-center"> Create New Topic </h1>
-				<div class = "card-body">
-					<form th:action="@{/forum}" th:object = "${forum}" method="POST">
-						<div class ="form-group">
-							<label> Topic Name </label>
-							<input
-							type = "text"
-							name = "forumName"
-							th:field = "*{forumName}"
-							class = "form-control"
-							placeholder="Enter Topic Name"
-							/>
-						</div>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+			<h1 class="text-center"> Create New Topic </h1>
+			<div class="card-body">
+				<form th:action="@{/forum}" th:object="${forum}" method="POST">
+					<div class="form-group">
+						<label> Topic Name </label>
+						<input
+								type="text"
+								name="forumName"
+								th:field="*{forumName}"
+								class="form-control"
+								placeholder="Enter Topic Name" />
+						<!-- Prikaz gre?ke za forumName -->
+						<p class="text-danger" th:if="${#fields.hasErrors('forumName')}" th:errors="*{forumName}">Invalid Name</p>
+					</div>
 
-						
-						<div class ="form-group">
-							<label> Topic Text </label>
-							<input
-							type = "text"
-							name = "text"
-							th:field = "*{text}"
-							class = "form-control"
-							placeholder="Enter Text"
-							/>
-						</div>
-						
-						<div class = "box-footer">
-							<button type="submit" class = "btn btn-primary">
-								Submit
-							</button>
-						</div>
-					</form>
-				
-				</div>
+					<div class="form-group">
+						<label> Topic Text </label>
+						<textarea
+								name="text"
+								th:field="*{text}"
+								class="form-control"
+								placeholder="Enter Text"></textarea>
+						<!-- Prikaz gre?ke za text -->
+						<p class="text-danger" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Invalid Text</p>
+					</div>
+
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">
+							Submit
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
